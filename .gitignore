@@ -1,0 +1,21 @@
+*.i
+*.ii
+*.gpu
+*.ptx
+*.cubin
+*.fatbin
+
+# Build output — C/C++
+*.o
+*.a
+*.d
+*.so
+*.so.*
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Generated inference artifacts (built on-device, never committed)
+*.engine
+*.trt
