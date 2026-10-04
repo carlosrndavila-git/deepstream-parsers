@@ -40,6 +40,16 @@ Common to the parsers here:
 | Directory | Exported symbol | Reads |
 |---|---|---|
 | `lpr_bbox/` | `NvDsInferParseCustomYoloLPR` | single-class YOLO detector, `[1, 5, N]` channel-first (`cx, cy, w, h, conf`) |
+| `classifier_softmax/` | `NvDsInferClassiferParseSoftmaxTop1` | full-frame classifier, raw class scores (logits); reports the best class with its softmax probability (`parse-classifier-func-name`, `network-type=1`) |
+
+### Why a classifier needs one
+
+`nvinfer` decodes a classifier itself, but its built-in parser reports the raw maximum
+score, a logit for a stock export without a Softmax layer, and takes names from a
+DeepStream-format label file (`;`-separated per output layer). With an ordinary
+one-label-per-line file the class has no label and nothing is attached. The classifier
+parser applies softmax and always labels the class with its id, so a probability is
+attached on every frame.
 
 ## Building
 
